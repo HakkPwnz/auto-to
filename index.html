@@ -248,9 +248,9 @@ textarea { resize: vertical; min-height: 80px; }
 .tab-bar { display:none; }
 @media (max-width: 768px) {
   .tab-bar { display: flex; position: fixed; bottom: 0; left: 0; right: 0; background: var(--color-surface); border-top: 1px solid var(--color-divider); z-index: 20; }
-  .tab-bar-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: var(--space-2); font-size: 10px; color: var(--color-text-faint); cursor: pointer; }
+  .tab-bar-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: var(--space-3) var(--space-2); font-size: 11px; color: var(--color-text-faint); cursor: pointer; min-height: 56px; }
   .tab-bar-item.active { color: var(--color-primary); }
-  body { padding-bottom: 64px; }
+  body { padding-bottom: 72px; }
 }
 .notifications-dot { width: 8px; height: 8px; background: var(--color-error); border-radius: 50%; display:inline-block; margin-left: 4px; }
 </style>
@@ -425,23 +425,23 @@ textarea { resize: vertical; min-height: 80px; }
 <!-- MOBILE TAB BAR -->
 <nav class="tab-bar">
   <div class="tab-bar-item active" onclick="showSection('dashboard',null,this)">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
     Главная
   </div>
   <div class="tab-bar-item" onclick="showSection('cars',null,this)">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17H3a2 2 0 01-2-2v-4l3.5-6h13l3.5 6v4a2 2 0 01-2 2h-2"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="17.5" r="2.5"/></svg>
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17H3a2 2 0 01-2-2v-4l3.5-6h13l3.5 6v4a2 2 0 01-2 2h-2"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="17.5" r="2.5"/></svg>
     Авто
   </div>
   <div class="tab-bar-item" onclick="showSection('records',null,this)">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
     Записи
   </div>
   <div class="tab-bar-item" onclick="showSection('reminders',null,this)">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
     Напоминания
   </div>
   <div class="tab-bar-item" onclick="showSection('analytics',null,this)">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
     Аналитика
   </div>
 </nav>
@@ -461,7 +461,7 @@ textarea { resize: vertical; min-height: 80px; }
       </div>
       <div class="form-group">
         <label>Вид работы *</label>
-        <select id="rec-type">
+        <select id="rec-type" onchange="toggleCustomType(this.value)">
           <option>Замена масла</option>
           <option>Замена фильтров</option>
           <option>Замена тормозных колодок</option>
@@ -479,8 +479,12 @@ textarea { resize: vertical; min-height: 80px; }
           <option>Диагностика</option>
           <option>Кузовной ремонт</option>
           <option>ТО-1</option><option>ТО-2</option><option>ТО-3</option>
-          <option>Прочее</option>
+          <option value="__custom__">✏️ Свой вариант...</option>
         </select>
+      </div>
+      <div class="form-group" id="custom-type-group" style="display:none">
+        <label>Напишите вид работы *</label>
+        <input type="text" id="rec-type-custom" placeholder="Например: Замена помпы, Ремонт КПП...">
       </div>
       <div class="form-group">
         <label>Пробег (км) *</label>
@@ -647,7 +651,7 @@ function showSection(name, sidebarBtn, mobileBtn) {
   if (matching) matching.classList.add('active');
   document.querySelectorAll('.tab-bar-item').forEach(t => t.classList.remove('active'));
   if (mobileBtn) mobileBtn.classList.add('active');
-  const titles = { dashboard:'Дашборд', cars:'Автомобили', records:'Записи ТО', reminders:'Напоминания', analytics:'Аналитика' };
+  const titles = { dashboard:'', cars:'Автомобили', records:'Записи ТО', reminders:'Напоминания', analytics:'Аналитика' };
   const btns = { dashboard:'Добавить запись', cars:'Добавить авто', records:'Добавить запись', reminders:'Добавить напоминание', analytics:null };
   document.getElementById('topbar-title').textContent = titles[name];
   const btn = document.getElementById('topbar-action-btn');
@@ -965,10 +969,31 @@ function openRecordModal(id = null) {
   }
   openModal('modal-record');
 }
+
+function toggleCustomType(val) {
+  const grp = document.getElementById('custom-type-group');
+  const inp = document.getElementById('rec-type-custom');
+  if (val === '__custom__') {
+    grp.style.display = '';
+    inp.focus();
+  } else {
+    grp.style.display = 'none';
+  }
+}
+
+function getRecType() {
+  const sel = document.getElementById('rec-type');
+  if (sel.value === '__custom__') {
+    const custom = document.getElementById('rec-type-custom').value.trim();
+    return custom || null;
+  }
+  return sel.value;
+}
+
 function saveRecord() {
   const carId = parseInt(document.getElementById('rec-car').value);
   const date = document.getElementById('rec-date').value;
-  const type = document.getElementById('rec-type').value;
+  const type = getRecType();
   if (!carId || !date || !type) { alert('Заполните обязательные поля'); return; }
   const data = { carId, date, type,
     mileage: parseInt(document.getElementById('rec-mileage').value)||null,
